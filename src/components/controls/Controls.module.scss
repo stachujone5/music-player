@@ -1,6 +1,7 @@
 .controls {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr 2fr;
+	display: flex;
+	justify-content: space-evenly;
+	margin: var(--spacer-1) 0;
 	.icon {
 		color: var(--clr-secondary);
 		display: inline-block;
@@ -9,8 +10,6 @@
 	}
 
 	.active {
-		transition: color 0.3;
-
 		.icon {
 			color: #da1212 !important;
 		}
@@ -39,17 +38,11 @@
 				color: var(--clr-accent);
 			}
 			&::before {
-				width: var(--spacer-4);
-				height: var(--spacer-4);
+				width: var(--spacer-3);
+				height: var(--spacer-3);
 				opacity: 0.8;
 				transform: translate(-50%, -50%) scale(1.25);
-				// box-shadow: 8px 23px 55px 1px rgba(223, 231, 239, 1);
 			}
 		}
-	}
-
-	.play {
-		font-size: var(--fz-6);
-		padding: var(--spacer-1) var(--spacer-1);
 	}
 }
