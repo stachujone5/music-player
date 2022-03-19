@@ -1,0 +1,27 @@
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--clr-background: #dfe7ef;
+	--clr-primary: #eef3f7;
+	--spacer-1: 0.5em;
+	--spacer-2: 1em;
+	--spacer-3: 1.5em;
+	--spacer-4: 2em;
+	--spacer-5: 2.5em;
+	--spacer-6: 3em;
+	--br: 1rem;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background-color: var(--clr-background);
+}
