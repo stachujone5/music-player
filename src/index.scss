@@ -9,6 +9,10 @@
 :root {
 	--clr-background: #dfe7ef;
 	--clr-primary: #eef3f7;
+	--clr-secondary: #acb8cc;
+	--clr-accent: #0e185f;
+
+	--spacer-05: 0.25em;
 	--spacer-1: 0.5em;
 	--spacer-2: 1em;
 	--spacer-3: 1.5em;
@@ -16,6 +20,22 @@
 	--spacer-5: 2.5em;
 	--spacer-6: 3em;
 	--br: 1rem;
+
+	--fz-1: 1rem;
+	--fz-2: 1.25rem;
+	--fz-3: 1.5rem;
+	--fz-4: 1.75rem;
+	--fz-5: 2rem;
+	--fz-6: 2.25rem;
+	--fz-7: 2.5rem;
+	--fz-8: 3rem;
+}
+
+button {
+	font-family: inherit;
+	border: none;
+	cursor: pointer;
+	background-color: transparent;
 }
 
 body {
@@ -24,4 +44,5 @@ body {
 	align-items: center;
 	min-height: 100vh;
 	background-color: var(--clr-background);
+	font-family: 'Fredoka', sans-serif;
 }
