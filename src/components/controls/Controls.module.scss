@@ -1,12 +1,13 @@
 .controls {
 	display: flex;
 	justify-content: space-evenly;
-	margin: var(--spacer-1) 0;
+	transform: translateY(-2em);
 	.icon {
 		color: var(--clr-secondary);
 		display: inline-block;
 		position: relative;
 		transform: translateY(10%);
+		transition: color 0.3s;
 	}
 
 	.active {
@@ -30,7 +31,7 @@
 			background-color: #fff;
 			opacity: 0;
 			border-radius: 50%;
-			transition: width 0.5s, height 0.5s, opacity 0.5s, transform 0.5s;
+			transition: width 0.3s, height 0.3s, opacity 0.3s, transform 0.3s;
 			box-shadow: 8px 23px 55px 1px rgba(211, 216, 222, 1);
 		}
 		&:hover {
