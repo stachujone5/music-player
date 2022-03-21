@@ -1,22 +1,21 @@
-import { useContext, useState } from 'react'
 import { Container } from './components/container/Container'
 import { Controls } from './components/controls/Controls'
 import { ImageContainer } from './components/image_container/ImageContainer'
 import { Info } from './components/info/Info'
 import { Progress } from './components/progress/Progress'
-import { AppContext } from './contexts/AppContext'
-import { SONGS, songInterface } from './songs'
+import { usePlayer } from './hooks/usePlayer'
 
 export const App: React.FC = () => {
-	const { state } = useContext(AppContext)
-	const [songs, setSongs] = useState<songInterface[]>(SONGS)
+	const { state, songs, setSongs, dispatch } = usePlayer()
+
+	const currentSong = songs[state.songIndex]
 
 	return (
 		<Container>
-			<ImageContainer img={songs[state.songIndex].img} />
-			<Controls link={songs[state.songIndex].link} songs={songs} setSongs={setSongs} />
-			<Progress source={songs[state.songIndex].source} isPlaying={state.isPlaying} />
-			<Info author={songs[state.songIndex].author} title={songs[state.songIndex].title} />
+			<ImageContainer img={currentSong.img} />
+			<Controls link={currentSong.link} songs={songs} setSongs={setSongs} dispatch={dispatch} state={state} />
+			<Progress source={currentSong.source} isPlaying={state.isPlaying} />
+			<Info author={currentSong.author} title={currentSong.title} />
 		</Container>
 	)
 }

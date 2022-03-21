@@ -1,31 +1,17 @@
-import { createContext, ReactNode, useReducer } from 'react'
-import { SONGS } from '../songs'
+import { useReducer, useState } from 'react'
+import { SONGS, songInterface } from '../songs'
 
 const initialState: playerState = { songIndex: 0, isPlaying: false }
 
-interface AppProviderProps {
-	children: ReactNode
-}
-
-interface playerState {
+export interface playerState {
 	songIndex: number
 	isPlaying: boolean
 }
 
-interface playerAction {
+export interface playerAction {
 	type: string
 	payload?: any
 }
-
-interface AppContextInitialState {
-	state: playerState
-	dispatch: React.Dispatch<{ type: string; payload?: any }>
-}
-
-export const AppContext = createContext<AppContextInitialState>({
-	state: initialState,
-	dispatch: () => null,
-})
 
 const reducer = (state: playerState, action: playerAction) => {
 	if (action.type === 'TOGGLE_PLAY') {
@@ -47,8 +33,9 @@ const reducer = (state: playerState, action: playerAction) => {
 	return state
 }
 
-export const AppProvider = ({ children }: AppProviderProps) => {
+export const usePlayer = () => {
 	const [state, dispatch] = useReducer(reducer, initialState)
+	const [songs, setSongs] = useState<songInterface[]>(SONGS)
 
-	return <AppContext.Provider value={{ dispatch, state }}>{children}</AppContext.Provider>
+	return { state, dispatch, songs, setSongs }
 }

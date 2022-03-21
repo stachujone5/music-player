@@ -1,20 +1,19 @@
 import { FaArrowRight, FaArrowLeft, FaHeart, FaExternalLinkAlt, FaPlay, FaPause } from 'react-icons/fa'
 import { IconContext } from 'react-icons'
 import { Button } from '../button/Button'
-import { useContext } from 'react'
 import classes from './Controls.module.scss'
-import { AppContext } from '../../contexts/AppContext'
 import { songInterface } from '../../songs'
+import { playerAction, playerState } from '../../hooks/usePlayer'
 
 interface ControlsProps {
 	songs: songInterface[]
 	link: string
 	setSongs: React.Dispatch<React.SetStateAction<songInterface[]>>
+	dispatch: React.Dispatch<playerAction>
+	state: playerState
 }
 
-export const Controls = ({ link, songs, setSongs }: ControlsProps) => {
-	const { state, dispatch } = useContext(AppContext)
-
+export const Controls = ({ link, songs, setSongs, dispatch, state }: ControlsProps) => {
 	const handleNextSong = () => {
 		dispatch({ type: 'NEXT_SONG' })
 	}
@@ -26,6 +25,7 @@ export const Controls = ({ link, songs, setSongs }: ControlsProps) => {
 	const handlePlayToggle = () => {
 		dispatch({ type: 'TOGGLE_PLAY' })
 	}
+
 	const handleIsFavourite = (id: number) => {
 		const currentSong = songs.find(song => song.id === id)
 		const newSongs = songs.filter(song => song.id !== id)

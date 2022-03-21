@@ -1,5 +1,5 @@
 interface ButtonProps {
-	onClick: any
+	onClick: () => void
 	icon: JSX.Element
 	className?: string
 }
