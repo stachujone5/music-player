@@ -12,15 +12,18 @@ interface ControlsProps {
 	dispatch: React.Dispatch<playerAction>
 	state: playerState
 	length: string
+	setWidth: React.Dispatch<React.SetStateAction<number>>
 }
 
-export const Controls = ({ link, songs, setSongs, dispatch, state, length }: ControlsProps) => {
+export const Controls = ({ link, songs, setSongs, dispatch, state, length, setWidth }: ControlsProps) => {
 	const handleNextSong = () => {
 		dispatch({ type: 'NEXT_SONG' })
+		setWidth(0)
 	}
 
 	const handlePrevSong = () => {
 		dispatch({ type: 'PREV_SONG' })
+		setWidth(0)
 	}
 
 	const handlePlayToggle = () => {
