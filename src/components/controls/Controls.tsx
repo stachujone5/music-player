@@ -13,9 +13,21 @@ interface ControlsProps {
 	state: playerState
 	length: string
 	setWidth: React.Dispatch<React.SetStateAction<number>>
+	time: number
+	setTime: React.Dispatch<React.SetStateAction<number>>
 }
 
-export const Controls = ({ link, songs, setSongs, dispatch, state, length, setWidth }: ControlsProps) => {
+export const Controls = ({
+	link,
+	songs,
+	setSongs,
+	dispatch,
+	state,
+	length,
+	setWidth,
+	time,
+	setTime,
+}: ControlsProps) => {
 	const handleNextSong = () => {
 		dispatch({ type: 'NEXT_SONG' })
 		setWidth(0)
@@ -42,6 +54,25 @@ export const Controls = ({ link, songs, setSongs, dispatch, state, length, setWi
 		}
 	}
 
+	const formatTime = (time: number) => {
+		const seconds: string | number = Math.round(time)
+		let newTime
+		if (seconds >= 60) {
+			newTime = `0${Math.floor(seconds / 60)}:${seconds % 60}`
+
+			if (seconds % 60 < 10) {
+				newTime = `0${Math.floor(seconds / 60)}:0${seconds % 60}`
+			}
+		}
+		if (seconds < 10) {
+			newTime = `0${Math.floor(seconds / 60)}:0${seconds % 60}`
+		}
+		if (seconds >= 10 && seconds < 60) {
+			newTime = `0${Math.floor(seconds / 60)}:${seconds % 60}`
+		}
+		return newTime
+	}
+
 	return (
 		<IconContext.Provider value={{ className: classes.icon }}>
 			<p className={classes['full-time']}>{length}</p>
@@ -54,11 +85,25 @@ export const Controls = ({ link, songs, setSongs, dispatch, state, length, setWi
 				<a rel='noreferrer' target='_blank' className={classes.btn} href={link}>
 					<FaExternalLinkAlt />
 				</a>
-				<Button className={classes.btn} onClick={handlePrevSong} icon={<FaArrowLeft />} />
-				<Button className={classes.btn} onClick={handleNextSong} icon={<FaArrowRight />} />
+				<Button
+					className={classes.btn}
+					onClick={() => {
+						handlePrevSong()
+						setTime(0)
+					}}
+					icon={<FaArrowLeft />}
+				/>
+				<Button
+					className={classes.btn}
+					onClick={() => {
+						handleNextSong()
+						setTime(0)
+					}}
+					icon={<FaArrowRight />}
+				/>
 				<Button className={classes.btn} onClick={handlePlayToggle} icon={!state.isPlaying ? <FaPlay /> : <FaPause />} />
 			</div>
-			<p className={classes['current-time']}>00:00</p>
+			<p className={classes['current-time']}>{formatTime(time)}</p>
 		</IconContext.Provider>
 	)
 }

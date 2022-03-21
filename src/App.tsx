@@ -6,7 +6,7 @@ import { Progress } from './components/progress/Progress'
 import { usePlayer } from './hooks/usePlayer'
 
 export const App: React.FC = () => {
-	const { state, songs, setSongs, dispatch, width, setWidth } = usePlayer()
+	const { state, songs, setSongs, dispatch, width, setWidth, time, setTime } = usePlayer()
 	const currentSong = songs[state.songIndex]
 	return (
 		<Container>
@@ -19,8 +19,17 @@ export const App: React.FC = () => {
 				state={state}
 				length={currentSong.length}
 				setWidth={setWidth}
+				time={time}
+				setTime={setTime}
 			/>
-			<Progress source={currentSong.source} isPlaying={state.isPlaying} width={width} setWidth={setWidth} />
+			<Progress
+				source={currentSong.source}
+				isPlaying={state.isPlaying}
+				width={width}
+				setWidth={setWidth}
+				setTime={setTime}
+				dispatch={dispatch}
+			/>
 			<Info author={currentSong.author} title={currentSong.title} />
 		</Container>
 	)

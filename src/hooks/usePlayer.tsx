@@ -37,6 +37,7 @@ export const usePlayer = () => {
 	const [state, dispatch] = useReducer(reducer, initialState)
 	const [songs, setSongs] = useState<songInterface[]>(SONGS)
 	const [width, setWidth] = useState(0)
+	const [time, setTime] = useState(0)
 
-	return { state, dispatch, songs, setSongs, width, setWidth }
+	return { state, dispatch, songs, setSongs, width, setWidth, time, setTime }
 }
