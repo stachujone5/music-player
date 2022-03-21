@@ -13,7 +13,14 @@ export const App: React.FC = () => {
 	return (
 		<Container>
 			<ImageContainer img={currentSong.img} />
-			<Controls link={currentSong.link} songs={songs} setSongs={setSongs} dispatch={dispatch} state={state} />
+			<Controls
+				link={currentSong.link}
+				songs={songs}
+				setSongs={setSongs}
+				dispatch={dispatch}
+				state={state}
+				length={currentSong.length}
+			/>
 			<Progress source={currentSong.source} isPlaying={state.isPlaying} />
 			<Info author={currentSong.author} title={currentSong.title} />
 		</Container>

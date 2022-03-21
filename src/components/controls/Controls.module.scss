@@ -1,7 +1,7 @@
 .controls {
 	display: flex;
 	justify-content: space-evenly;
-	transform: translateY(-2em);
+	transform: translateY(-2.5em);
 	.icon {
 		color: var(--clr-secondary);
 		display: inline-block;
@@ -45,5 +45,25 @@
 				transform: translate(-50%, -50%) scale(1.25);
 			}
 		}
+	}
+}
+
+.current-time {
+	transform: translateY(0.75em);
+	font-weight: 700;
+	font-size: var(--fz-1);
+	margin: -1em 0;
+	color: var(--clr-accent);
+}
+
+.full-time {
+	transform: translateY(2.3em);
+	margin-left: auto;
+	width: fit-content;
+	font-weight: 700;
+	color: var(--clr-accent);
+
+	@media (min-width: 30rem) {
+		transform: translateY(3em);
 	}
 }

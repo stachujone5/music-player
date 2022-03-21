@@ -11,9 +11,10 @@ interface ControlsProps {
 	setSongs: React.Dispatch<React.SetStateAction<songInterface[]>>
 	dispatch: React.Dispatch<playerAction>
 	state: playerState
+	length: string
 }
 
-export const Controls = ({ link, songs, setSongs, dispatch, state }: ControlsProps) => {
+export const Controls = ({ link, songs, setSongs, dispatch, state, length }: ControlsProps) => {
 	const handleNextSong = () => {
 		dispatch({ type: 'NEXT_SONG' })
 	}
@@ -40,6 +41,7 @@ export const Controls = ({ link, songs, setSongs, dispatch, state }: ControlsPro
 
 	return (
 		<IconContext.Provider value={{ className: classes.icon }}>
+			<p className={classes['full-time']}>{length}</p>
 			<div className={classes.controls}>
 				<Button
 					className={`${classes.btn} ${songs[state.songIndex].isFavourite ? classes.favourite : ''}`}
@@ -53,6 +55,7 @@ export const Controls = ({ link, songs, setSongs, dispatch, state }: ControlsPro
 				<Button className={classes.btn} onClick={handleNextSong} icon={<FaArrowRight />} />
 				<Button className={classes.btn} onClick={handlePlayToggle} icon={!state.isPlaying ? <FaPlay /> : <FaPause />} />
 			</div>
+			<p className={classes['current-time']}>00:00</p>
 		</IconContext.Provider>
 	)
 }
