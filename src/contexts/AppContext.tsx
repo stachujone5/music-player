@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useReducer } from 'react'
+import { SONGS } from '../songs'
 
-const initialState = { songIndex: 0, isPlaying: false }
+const initialState: playerState = { songIndex: 0, isPlaying: false }
 
 interface AppProviderProps {
 	children: ReactNode
@@ -31,11 +32,18 @@ const reducer = (state: playerState, action: playerAction) => {
 		return { ...state, isPlaying: !state.isPlaying }
 	}
 	if (action.type === 'NEXT_SONG') {
-		return { ...state, songIndex: state.songIndex + 1 }
+		if (state.songIndex === SONGS.length - 1) {
+			return { ...state, songIndex: 0, isPlaying: false }
+		}
+		return { ...state, songIndex: state.songIndex + 1, isPlaying: false }
 	}
 	if (action.type === 'PREV_SONG') {
-		return { ...state, songIndex: state.songIndex - 1 }
+		if (state.songIndex === 0) {
+			return { ...state, songIndex: SONGS.length - 1, isPlaying: false }
+		}
+		return { ...state, songIndex: state.songIndex - 1, isPlaying: false }
 	}
+
 	return state
 }
 
