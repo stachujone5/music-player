@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/music-player/static/css/main.cb0a9aea.css",
+    "main.js": "/music-player/static/js/main.b5c624c4.js",
+    "static/media/rapgod.mp3": "/music-player/static/media/rapgod.70f20f8e8e99b0082157.mp3",
+    "static/media/himandi.mp3": "/music-player/static/media/himandi.de734c3b32cc73187d85.mp3",
+    "static/media/hrs.mp3": "/music-player/static/media/hrs.380e1cd0bc98bb1c43bc.mp3",
+    "static/media/havana.mp3": "/music-player/static/media/havana.2486d81d1a118384e6e6.mp3",
+    "static/media/mood.mp3": "/music-player/static/media/mood.c12cc5b885a808f824be.mp3",
+    "static/media/allmine.mp3": "/music-player/static/media/allmine.7928170331e99d473db3.mp3",
+    "static/media/mood.webp": "/music-player/static/media/mood.1f0bb553fcbe0bebef6d.webp",
+    "static/media/allmine.webp": "/music-player/static/media/allmine.27e4f313863c6f6ca3e5.webp",
+    "static/media/himandi.webp": "/music-player/static/media/himandi.e5101c4e2cc13d299568.webp",
+    "static/media/rapgod.webp": "/music-player/static/media/rapgod.5512c05ae5953c66db67.webp",
+    "static/media/hrs.webp": "/music-player/static/media/hrs.00c94c2933c6ac3ece4b.webp",
+    "static/media/havana.webp": "/music-player/static/media/havana.7661965aafc217208f66.webp",
+    "index.html": "/music-player/index.html",
+    "main.cb0a9aea.css.map": "/music-player/static/css/main.cb0a9aea.css.map",
+    "main.b5c624c4.js.map": "/music-player/static/js/main.b5c624c4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cb0a9aea.css",
+    "static/js/main.b5c624c4.js"
+  ]
+}
