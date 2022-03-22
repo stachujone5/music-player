@@ -1,12 +1,12 @@
 interface ButtonProps {
 	onClick: () => void
 	icon: JSX.Element
-	className?: string
+	className: string
 }
 
 export const Button: React.VFC<ButtonProps> = ({ onClick, icon, className }) => {
 	return (
-		<button className={`${className ? className : ''}`} onClick={onClick}>
+		<button className={className} onClick={onClick}>
 			{icon}
 		</button>
 	)

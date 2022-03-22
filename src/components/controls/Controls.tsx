@@ -4,6 +4,7 @@ import { Button } from '../button/Button'
 import classes from './Controls.module.scss'
 import { songInterface } from '../../songs'
 import { playerAction, playerState } from '../../hooks/usePlayer'
+import { ACTIONS } from '../../hooks/actions'
 
 interface ControlsProps {
 	songs: songInterface[]
@@ -16,15 +17,15 @@ export const Controls = ({ songs, setSongs, dispatch, state }: ControlsProps) =>
 	const currentSong = songs[state.songIndex]
 
 	const handleNextSong = () => {
-		dispatch({ type: 'NEXT_SONG' })
+		dispatch({ type: ACTIONS.NEXT_SONG })
 	}
 
 	const handlePrevSong = () => {
-		dispatch({ type: 'PREV_SONG' })
+		dispatch({ type: ACTIONS.PREV_SONG })
 	}
 
 	const handlePlayToggle = () => {
-		dispatch({ type: 'TOGGLE_PLAY' })
+		dispatch({ type: ACTIONS.TOGGLE_PLAY })
 	}
 
 	const handleIsFavourite = (id: number) => {

@@ -1,5 +1,6 @@
 import { useReducer, useState } from 'react'
 import { SONGS, songInterface } from '../songs'
+import { ACTIONS } from './actions'
 
 const initialState: playerState = { songIndex: 0, isPlaying: false, width: 0, time: 0 }
 
@@ -16,26 +17,26 @@ export interface playerAction {
 }
 
 const reducer = (state: playerState, action: playerAction) => {
-	if (action.type === 'TOGGLE_PLAY') {
+	if (action.type === ACTIONS.TOGGLE_PLAY) {
 		return { ...state, isPlaying: !state.isPlaying }
 	}
-	if (action.type === 'PLAY') {
+	if (action.type === ACTIONS.PLAY) {
 		return { ...state, isPlaying: true }
 	}
-	if (action.type === 'NEXT_SONG') {
+	if (action.type === ACTIONS.NEXT_SONG) {
 		if (state.songIndex === SONGS.length - 1) {
 			return { ...state, songIndex: 0, time: 0, width: 0 }
 		}
 		return { ...state, songIndex: state.songIndex + 1, time: 0, width: 0 }
 	}
-	if (action.type === 'PREV_SONG') {
+	if (action.type === ACTIONS.PREV_SONG) {
 		if (state.songIndex === 0) {
 			return { ...state, songIndex: SONGS.length - 1, time: 0, width: 0 }
 		}
 		return { ...state, songIndex: state.songIndex - 1, time: 0, width: 0 }
 	}
 
-	if (action.type === 'SET_BAR') {
+	if (action.type === ACTIONS.SET_BAR) {
 		return { ...state, width: action.payload.width, time: action.payload.time }
 	}
 

@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import { playerAction, playerState } from '../../hooks/usePlayer'
 import { songInterface } from '../../songs'
+import { ACTIONS } from '../../hooks/actions'
 import classes from './Progress.module.scss'
 
 interface ProgressProps {
@@ -26,7 +27,7 @@ export const Progress = ({ dispatch, state, songs }: ProgressProps) => {
 		if (state.isPlaying) {
 			progressInterval = setInterval(() => {
 				widthRef.current = (audioRef.current!.currentTime / audioRef.current!.duration) * 100
-				dispatch({ type: 'SET_BAR', payload: { width: widthRef.current, time: audioRef.current!.currentTime } })
+				dispatch({ type: ACTIONS.SET_BAR, payload: { width: widthRef.current, time: audioRef.current!.currentTime } })
 			}, 100)
 		}
 
@@ -34,7 +35,7 @@ export const Progress = ({ dispatch, state, songs }: ProgressProps) => {
 	}, [state.isPlaying, dispatch])
 
 	const handleEnd = () => {
-		dispatch({ type: 'NEXT_SONG' })
+		dispatch({ type: ACTIONS.NEXT_SONG })
 	}
 
 	const handleBar = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -44,7 +45,7 @@ export const Progress = ({ dispatch, state, songs }: ProgressProps) => {
 		const percentWidth = clickedWidth / targetWidth
 		audioRef.current!.currentTime = time
 		widthRef.current = percentWidth
-		dispatch({ type: 'PLAY' })
+		dispatch({ type: ACTIONS.PLAY })
 	}
 
 	const currentSong = songs[state.songIndex]
