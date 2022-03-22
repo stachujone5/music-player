@@ -27,7 +27,6 @@ export const Progress = ({ dispatch, state, songs }: ProgressProps) => {
 			const progressInterval: NodeJS.Timer = setInterval(() => {
 				widthRef.current = (audioRef.current!.currentTime / audioRef.current!.duration) * 100
 				dispatch({ type: ACTIONS.SET_BAR, payload: { width: widthRef.current, time: audioRef.current!.currentTime } })
-				console.log('r')
 			}, 100)
 			return () => clearInterval(progressInterval)
 		}
