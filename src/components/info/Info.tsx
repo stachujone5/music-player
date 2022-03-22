@@ -1,15 +1,18 @@
+import { playerState } from '../../hooks/usePlayer'
+import { songInterface } from '../../songs'
 import classes from './Info.module.scss'
 
 interface InfoProps {
-	author: string
-	title: string
+	songs: songInterface[]
+	state: playerState
 }
 
-export const Info = ({ author, title }: InfoProps) => {
+export const Info = ({ songs, state }: InfoProps) => {
+	const currentSong = songs[state.songIndex]
 	return (
 		<>
-			<h2 className={classes.author}>{author}</h2>
-			<h3 className={classes.title}>{title}</h3>
+			<h2 className={classes.author}>{currentSong.author}</h2>
+			<h3 className={classes.title}>{currentSong.title}</h3>
 		</>
 	)
 }

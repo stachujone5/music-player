@@ -6,31 +6,13 @@ import { Progress } from './components/progress/Progress'
 import { usePlayer } from './hooks/usePlayer'
 
 export const App: React.FC = () => {
-	const { state, songs, setSongs, dispatch, width, setWidth, time, setTime } = usePlayer()
-	const currentSong = songs[state.songIndex]
+	const { state, songs, setSongs, dispatch } = usePlayer()
 	return (
 		<Container>
-			<ImageContainer img={currentSong.img} />
-			<Controls
-				link={currentSong.link}
-				songs={songs}
-				setSongs={setSongs}
-				dispatch={dispatch}
-				state={state}
-				length={currentSong.length}
-				setWidth={setWidth}
-				time={time}
-				setTime={setTime}
-			/>
-			<Progress
-				source={currentSong.source}
-				isPlaying={state.isPlaying}
-				width={width}
-				setWidth={setWidth}
-				setTime={setTime}
-				dispatch={dispatch}
-			/>
-			<Info author={currentSong.author} title={currentSong.title} />
+			<ImageContainer songs={songs} state={state} />
+			<Controls songs={songs} setSongs={setSongs} dispatch={dispatch} state={state} />
+			<Progress dispatch={dispatch} state={state} songs={songs} />
+			<Info songs={songs} state={state} />
 		</Container>
 	)
 }

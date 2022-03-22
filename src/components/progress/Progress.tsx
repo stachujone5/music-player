@@ -1,21 +1,20 @@
-import { useRef, useEffect } from 'react'
-import { playerAction } from '../../hooks/usePlayer'
+import React, { useRef, useEffect } from 'react'
+import { playerAction, playerState } from '../../hooks/usePlayer'
+import { songInterface } from '../../songs'
 import classes from './Progress.module.scss'
 
 interface ProgressProps {
-	source: string
-	isPlaying: boolean
-	width: number
-	setWidth: React.Dispatch<React.SetStateAction<number>>
-	setTime: React.Dispatch<React.SetStateAction<number>>
 	dispatch: React.Dispatch<playerAction>
+	state: playerState
+	songs: songInterface[]
 }
 
-export const Progress = ({ source, isPlaying, width, setWidth, setTime, dispatch }: ProgressProps) => {
+export const Progress = ({ dispatch, state, songs }: ProgressProps) => {
 	const audioRef = useRef<HTMLAudioElement>(null)
 	const widthRef = useRef(0)
+
 	useEffect(() => {
-		if (isPlaying) {
+		if (state.isPlaying) {
 			audioRef.current?.play()
 		} else {
 			audioRef.current?.pause()
@@ -24,27 +23,36 @@ export const Progress = ({ source, isPlaying, width, setWidth, setTime, dispatch
 
 	useEffect(() => {
 		let progressInterval: NodeJS.Timer
-		if (isPlaying) {
+		if (state.isPlaying) {
 			progressInterval = setInterval(() => {
 				widthRef.current = (audioRef.current!.currentTime / audioRef.current!.duration) * 100
-				setWidth(widthRef.current)
-				setTime(audioRef.current!.currentTime)
-			}, 1000)
+				dispatch({ type: 'SET_BAR', payload: { width: widthRef.current, time: audioRef.current!.currentTime } })
+			}, 100)
 		}
 
 		return () => clearInterval(progressInterval)
-	}, [isPlaying, setWidth, setTime])
+	}, [state.isPlaying, dispatch])
 
 	const handleEnd = () => {
 		dispatch({ type: 'NEXT_SONG' })
-		setWidth(0)
-		setTime(0)
 	}
 
+	const handleBar = (e: React.MouseEvent<HTMLDivElement>) => {
+		const targetWidth = e.currentTarget.clientWidth
+		const clickedWidth = e.nativeEvent.offsetX
+		const time = (clickedWidth / targetWidth) * audioRef.current!.duration
+		const percentWidth = clickedWidth / targetWidth
+		audioRef.current!.currentTime = time
+		widthRef.current = percentWidth
+		dispatch({ type: 'PLAY' })
+	}
+
+	const currentSong = songs[state.songIndex]
+
 	return (
-		<div className={classes.progress}>
-			<audio ref={audioRef} src={source} onEnded={handleEnd}></audio>
-			<div className={classes.inside} style={{ width: `${width}%` }}></div>
+		<div className={classes.progress} onClick={handleBar}>
+			<audio ref={audioRef} src={currentSong.source} onEnded={handleEnd}></audio>
+			<div className={classes.inside} style={{ width: `${state.width}%` }}></div>
 		</div>
 	)
 }
