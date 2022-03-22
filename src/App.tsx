@@ -7,6 +7,7 @@ import { usePlayer } from './hooks/usePlayer'
 
 export const App: React.FC = () => {
 	const { state, songs, setSongs, dispatch } = usePlayer()
+
 	return (
 		<Container>
 			<ImageContainer songs={songs} state={state} />

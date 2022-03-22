@@ -23,16 +23,31 @@ export const Progress = ({ dispatch, state, songs }: ProgressProps) => {
 	})
 
 	useEffect(() => {
-		let progressInterval: NodeJS.Timer
 		if (state.isPlaying) {
-			progressInterval = setInterval(() => {
+			const progressInterval: NodeJS.Timer = setInterval(() => {
 				widthRef.current = (audioRef.current!.currentTime / audioRef.current!.duration) * 100
 				dispatch({ type: ACTIONS.SET_BAR, payload: { width: widthRef.current, time: audioRef.current!.currentTime } })
+				console.log('r')
 			}, 100)
+			return () => clearInterval(progressInterval)
 		}
-
-		return () => clearInterval(progressInterval)
 	}, [state.isPlaying, dispatch])
+
+	useEffect(() => {
+		window.addEventListener('keydown', e => {
+			if (e.keyCode === 32) {
+				dispatch({ type: ACTIONS.TOGGLE_PLAY })
+			}
+			if (e.keyCode === 39) {
+				dispatch({ type: ACTIONS.PLAY })
+				audioRef.current!.currentTime = audioRef.current!.currentTime + 5
+			}
+			if (e.keyCode === 37) {
+				dispatch({ type: ACTIONS.PLAY })
+				audioRef.current!.currentTime = audioRef.current!.currentTime - 5
+			}
+		})
+	}, [dispatch])
 
 	const handleEnd = () => {
 		dispatch({ type: ACTIONS.NEXT_SONG })

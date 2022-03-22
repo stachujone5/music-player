@@ -35,7 +35,6 @@ const reducer = (state: playerState, action: playerAction) => {
 		}
 		return { ...state, songIndex: state.songIndex - 1, time: 0, width: 0 }
 	}
-
 	if (action.type === ACTIONS.SET_BAR) {
 		return { ...state, width: action.payload.width, time: action.payload.time }
 	}

@@ -34,7 +34,10 @@
 			transition: width 0.3s, height 0.3s, opacity 0.3s, transform 0.3s;
 			box-shadow: 8px 23px 55px 1px rgba(211, 216, 222, 1);
 		}
-		&:hover {
+		&:hover,
+		&:focus-visible {
+			outline: none;
+
 			.icon {
 				color: var(--clr-accent);
 			}
