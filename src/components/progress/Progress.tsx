@@ -51,7 +51,7 @@ export const Progress = ({ dispatch, state, songs }: ProgressProps) => {
 	const currentSong = songs[state.songIndex]
 
 	return (
-		<div className={classes.progress} onClick={handleBar}>
+		<div className={classes.progress} onClick={handleBar} aria-label='Song progress bar'>
 			<audio ref={audioRef} src={currentSong.source} onEnded={handleEnd}></audio>
 			<div className={classes.inside} style={{ width: `${state.width}%` }}></div>
 		</div>

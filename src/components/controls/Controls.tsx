@@ -61,21 +61,31 @@ export const Controls = ({ songs, setSongs, dispatch, state }: ControlsProps) =>
 
 	return (
 		<IconContext.Provider value={{ className: classes.icon }}>
-			<p className={classes['full-time']}>{currentSong.length}</p>
+			<p aria-labelledby="Song's full time" className={classes['full-time']}>
+				{currentSong.length}
+			</p>
 			<div className={classes.controls}>
 				<Button
+					ariaLabel='Mark as favourite'
 					className={`${classes.btn} ${songs[state.songIndex].isFavourite ? classes.favourite : ''}`}
 					onClick={() => handleIsFavourite(state.songIndex)}
 					icon={<FaHeart />}
 				/>
-				<a rel='noreferrer' target='_blank' className={classes.btn} href={currentSong.link}>
+				<a aria-label='Song link' rel='noreferrer' target='_blank' className={classes.btn} href={currentSong.link}>
 					<FaExternalLinkAlt />
 				</a>
-				<Button className={classes.btn} onClick={handlePrevSong} icon={<FaArrowLeft />} />
-				<Button className={classes.btn} onClick={handleNextSong} icon={<FaArrowRight />} />
-				<Button className={classes.btn} onClick={handlePlayToggle} icon={!state.isPlaying ? <FaPlay /> : <FaPause />} />
+				<Button ariaLabel='Previous song' className={classes.btn} onClick={handlePrevSong} icon={<FaArrowLeft />} />
+				<Button ariaLabel='Next song' className={classes.btn} onClick={handleNextSong} icon={<FaArrowRight />} />
+				<Button
+					ariaLabel='Play/Pause'
+					className={classes.btn}
+					onClick={handlePlayToggle}
+					icon={!state.isPlaying ? <FaPlay /> : <FaPause />}
+				/>
 			</div>
-			<p className={classes['current-time']}>{formatTime(state.time)}</p>
+			<p aria-labelledby="Current song's time" className={classes['current-time']}>
+				{formatTime(state.time)}
+			</p>
 		</IconContext.Provider>
 	)
 }

@@ -11,8 +11,12 @@ export const Info = ({ songs, state }: InfoProps) => {
 	const currentSong = songs[state.songIndex]
 	return (
 		<>
-			<h2 className={classes.author}>{currentSong.author}</h2>
-			<h3 className={classes.title}>{currentSong.title}</h3>
+			<h2 className={classes.author} aria-describedby='Author'>
+				{currentSong.author}
+			</h2>
+			<h3 className={classes.title} aria-describedby='Title'>
+				{currentSong.title}
+			</h3>
 		</>
 	)
 }

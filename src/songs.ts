@@ -1,33 +1,78 @@
+import havanaSong from './sounds/havana.mp3'
+import havanaImg from './images/havana.webp'
+import hrsSong from './sounds/hrs.mp3'
+import hrsImg from './images/hrs.webp'
+import rapgodSong from './sounds/rapgod.mp3'
+import rapgodImg from './images/rapgod.webp'
+import allmineSong from './sounds/allmine.mp3'
+import allmineImg from './images/allmine.webp'
+import moodSong from './sounds/mood.mp3'
+import moodImg from './images/mood.webp'
+import himandiSong from './sounds/himandi.mp3'
+import himandiImg from './images/himandi.webp'
+
 export const SONGS = [
 	{
 		id: 0,
 		isFavourite: false,
-		length: '7.06',
-		source: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
-		link: 'https://www.youtube.com/watch?v=MYj-2YTeuu8',
-		img: 'https://4kwallpapers.com/images/walls/thumbs_2t/1455.jpg',
-		author: 'Belmondo',
-		title: 'Zaczarowana dorozka',
+		length: '3.39',
+		source: havanaSong,
+		link: 'https://www.youtube.com/watch?v=HCjNJDNzw8Y',
+		img: havanaImg,
+		author: 'Camila Cabello',
+		title: 'Havana',
 	},
 	{
 		id: 1,
 		isFavourite: false,
-		length: '8.48',
-		source: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3',
-		link: 'https://www.youtube.com/watch?v=MYj-2YTeuu8',
-		img: 'https://c4.wallpaperflare.com/wallpaper/500/442/354/outrun-vaporwave-hd-wallpaper-preview.jpg',
-		author: 'Dr. Dre',
-		title: 'Pump it',
+		length: '2.28',
+		source: allmineSong,
+		link: 'https://www.youtube.com/watch?v=TrQ7w1bdNvY',
+		img: allmineImg,
+		author: 'Kanye West',
+		title: 'All Mine',
 	},
 	{
 		id: 2,
 		isFavourite: false,
-		length: '5.03',
-		source: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',
-		link: 'https://www.youtube.com/watch?v=MYj-2YTeuu8',
-		img: 'https://images.wallpaperscraft.com/image/single/street_night_wet_155637_1920x1080.jpg',
-		author: 'Mobbyn',
-		title: 'Eyy 222',
+		length: '2.19',
+		source: moodSong,
+		link: 'https://www.youtube.com/watch?v=GrAchTdepsU',
+		img: moodImg,
+		author: '24kGoldn',
+		title: 'Mood',
+	},
+	{
+		id: 3,
+		isFavourite: false,
+		length: '6.13',
+		source: rapgodSong,
+		link: 'https://www.youtube.com/watch?v=XbGs_qK2PQA',
+		img: rapgodImg,
+		author: 'Eminem',
+		title: 'Rap God',
+	},
+
+	{
+		id: 4,
+		isFavourite: false,
+		length: '4.31',
+		source: himandiSong,
+		link: 'https://www.youtube.com/watch?v=SA7AIQw-7Ms',
+		img: himandiImg,
+		author: 'G-Eazy & Halsey',
+		title: 'Him & I',
+	},
+
+	{
+		id: 5,
+		isFavourite: false,
+		length: '3.58',
+		source: hrsSong,
+		link: 'https://www.youtube.com/watch?v=2up_Eq6r6Ko',
+		img: hrsImg,
+		author: 'Pitbull',
+		title: 'Hotel Room Service',
 	},
 ]
 

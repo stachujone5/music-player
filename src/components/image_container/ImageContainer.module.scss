@@ -1,21 +1,6 @@
 .img-container {
 	border-radius: var(--br);
 	overflow: hidden;
-	transform: translateY(-4em);
-	box-shadow: 8px 23px 55px 8px rgba(18, 18, 19, 0.5);
-}
-
-.active {
-	animation: showImg 0.35s;
-}
-
-@keyframes showImg {
-	from {
-		transform: translateY(-4em) scale(0.5);
-		filter: blur(10px);
-	}
-	to {
-		transform: translateY(-4em) scale(1);
-		filter: blur(0px);
-	}
+	transform: translateY(-3em);
+	box-shadow: 8px 10px 20px 3px rgba(18, 18, 19, 0.5);
 }
