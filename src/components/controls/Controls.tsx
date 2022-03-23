@@ -75,13 +75,13 @@ export const Controls = ({ songs, setSongs, dispatch, state }: ControlsProps) =>
 					<FaExternalLinkAlt />
 				</a>
 				<Button ariaLabel='Previous song' className={classes.btn} onClick={handlePrevSong} icon={<FaArrowLeft />} />
-				<Button ariaLabel='Next song' className={classes.btn} onClick={handleNextSong} icon={<FaArrowRight />} />
 				<Button
 					ariaLabel='Play/Pause'
 					className={classes.btn}
 					onClick={handlePlayToggle}
 					icon={!state.isPlaying ? <FaPlay /> : <FaPause />}
 				/>
+				<Button ariaLabel='Next song' className={classes.btn} onClick={handleNextSong} icon={<FaArrowRight />} />
 			</div>
 			<p aria-labelledby="Current song's time" className={classes['current-time']}>
 				{formatTime(state.time)}
