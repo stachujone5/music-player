@@ -1,21 +1,15 @@
 import { FaArrowRight, FaArrowLeft, FaHeart, FaExternalLinkAlt, FaPlay, FaPause } from 'react-icons/fa'
 import { IconContext } from 'react-icons'
-import { Button } from '../button/Button'
 import classes from './Controls.module.scss'
-import { songInterface } from '../../songs'
 import { playerAction, playerState } from '../../hooks/usePlayer'
 import { ACTIONS } from '../../hooks/actions'
 
 interface ControlsProps {
-	songs: songInterface[]
-	setSongs: React.Dispatch<React.SetStateAction<songInterface[]>>
 	dispatch: React.Dispatch<playerAction>
 	state: playerState
 }
 
-export const Controls = ({ songs, setSongs, dispatch, state }: ControlsProps) => {
-	const currentSong = songs[state.songIndex]
-
+export const Controls = ({ dispatch, state }: ControlsProps) => {
 	const handleNextSong = () => {
 		dispatch({ type: ACTIONS.NEXT_SONG })
 	}
@@ -29,14 +23,14 @@ export const Controls = ({ songs, setSongs, dispatch, state }: ControlsProps) =>
 	}
 
 	const handleIsFavourite = (id: number) => {
-		const favSong = songs.find(song => song.id === id)
-		const newSongs = songs.filter(song => song.id !== id)
+		const favSong = state.songs.find(song => song.id === id)
+		const newSongs = state.songs.filter(song => song.id !== id)
 
 		if (favSong) {
 			favSong.isFavourite = !favSong.isFavourite
 			newSongs.unshift(favSong)
 			newSongs.sort((a, b) => a.id - b.id)
-			setSongs(newSongs)
+			dispatch({ type: ACTIONS.SET_SONGS, payload: newSongs })
 		}
 	}
 
@@ -62,26 +56,32 @@ export const Controls = ({ songs, setSongs, dispatch, state }: ControlsProps) =>
 	return (
 		<IconContext.Provider value={{ className: classes.icon }}>
 			<p aria-labelledby="Song's full time" className={classes['full-time']}>
-				{currentSong.length}
+				{state.currentSong.length}
 			</p>
 			<div className={classes.controls}>
-				<Button
-					ariaLabel='Mark as favourite'
-					className={`${classes.btn} ${songs[state.songIndex].isFavourite ? classes.favourite : ''}`}
-					onClick={() => handleIsFavourite(state.songIndex)}
-					icon={<FaHeart />}
-				/>
-				<a aria-label='Song link' rel='noreferrer' target='_blank' className={classes.btn} href={currentSong.link}>
+				<button
+					aria-label='Mark as favourite'
+					className={`${classes.btn} ${state.currentSong.isFavourite ? classes.favourite : ''}`}
+					onClick={() => handleIsFavourite(state.songIndex)}>
+					<FaHeart />
+				</button>
+				<a
+					aria-label='Song link'
+					rel='noreferrer'
+					target='_blank'
+					className={classes.btn}
+					href={state.currentSong.link}>
 					<FaExternalLinkAlt />
 				</a>
-				<Button ariaLabel='Previous song' className={classes.btn} onClick={handlePrevSong} icon={<FaArrowLeft />} />
-				<Button
-					ariaLabel='Play/Pause'
-					className={classes.btn}
-					onClick={handlePlayToggle}
-					icon={!state.isPlaying ? <FaPlay /> : <FaPause />}
-				/>
-				<Button ariaLabel='Next song' className={classes.btn} onClick={handleNextSong} icon={<FaArrowRight />} />
+				<button aria-label='Previous song' className={classes.btn} onClick={handlePrevSong}>
+					<FaArrowLeft />
+				</button>
+				<button aria-label='Play/Pause' className={classes.btn} onClick={handlePlayToggle}>
+					{!state.isPlaying ? <FaPlay /> : <FaPause />}
+				</button>
+				<button aria-label='Next song' className={classes.btn} onClick={handleNextSong}>
+					<FaArrowRight />
+				</button>
 			</div>
 			<p aria-labelledby="Current song's time" className={classes['current-time']}>
 				{formatTime(state.time)}

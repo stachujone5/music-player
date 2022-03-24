@@ -1,16 +1,14 @@
 import React, { useRef, useEffect } from 'react'
 import { playerAction, playerState } from '../../hooks/usePlayer'
-import { songInterface } from '../../songs'
 import { ACTIONS } from '../../hooks/actions'
 import classes from './Progress.module.scss'
 
 interface ProgressProps {
 	dispatch: React.Dispatch<playerAction>
 	state: playerState
-	songs: songInterface[]
 }
 
-export const Progress = ({ dispatch, state, songs }: ProgressProps) => {
+export const Progress = ({ dispatch, state }: ProgressProps) => {
 	const audioRef = useRef<HTMLAudioElement>(null)
 	const widthRef = useRef(0)
 
@@ -34,14 +32,14 @@ export const Progress = ({ dispatch, state, songs }: ProgressProps) => {
 
 	useEffect(() => {
 		window.addEventListener('keydown', e => {
-			if (e.keyCode === 32) {
+			if (e.code === 'Space') {
 				dispatch({ type: ACTIONS.TOGGLE_PLAY })
 			}
-			if (e.keyCode === 39) {
+			if (e.code === 'ArrowRight') {
 				dispatch({ type: ACTIONS.PLAY })
 				audioRef.current!.currentTime = audioRef.current!.currentTime + 5
 			}
-			if (e.keyCode === 37) {
+			if (e.code === 'ArrowLeft') {
 				dispatch({ type: ACTIONS.PLAY })
 				audioRef.current!.currentTime = audioRef.current!.currentTime - 5
 			}
@@ -62,11 +60,9 @@ export const Progress = ({ dispatch, state, songs }: ProgressProps) => {
 		dispatch({ type: ACTIONS.PLAY })
 	}
 
-	const currentSong = songs[state.songIndex]
-
 	return (
 		<div className={classes.progress} onClick={handleBar} aria-label='Song progress bar'>
-			<audio ref={audioRef} src={currentSong.source} onEnded={handleEnd}></audio>
+			<audio ref={audioRef} src={state.currentSong.source} onEnded={handleEnd}></audio>
 			<div className={classes.inside} style={{ width: `${state.width}%` }}></div>
 		</div>
 	)
