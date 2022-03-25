@@ -90,7 +90,7 @@ export const Controls = ({ dispatch, state, audioRef }: ControlsProps) => {
 					<FaArrowRight />
 				</button>
 				<div className={classes['audio-container']}>
-					<button aria-label='Volume' className={classes.btn} onClick={handleVolumeChange}>
+					<button aria-label='Set volume' className={classes.btn} onClick={handleVolumeChange}>
 						<HiVolumeUp />
 					</button>
 					{state.showVolume && <SoundControl audioRef={audioRef} state={state} dispatch={dispatch} />}

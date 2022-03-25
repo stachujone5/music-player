@@ -8,10 +8,10 @@ interface InfoProps {
 export const Info = ({ state }: InfoProps) => {
 	return (
 		<>
-			<h2 className={classes.author} aria-describedby='Author'>
+			<h2 className={classes.author} aria-labelledby='Author'>
 				{state.currentSong.author}
 			</h2>
-			<h3 className={classes.title} aria-describedby='Title'>
+			<h3 className={classes.title} aria-labelledby='Title'>
 				{state.currentSong.title}
 			</h3>
 		</>

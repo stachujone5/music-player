@@ -7,7 +7,7 @@
 	@media (min-width: 30rem) {
 		left: -1em;
 	}
-
+	animation: show 0.3s forwards;
 	.input-progress {
 		height: 6px;
 		background-color: var(--clr-accent);
@@ -33,5 +33,15 @@
 			border-radius: 100%;
 			background-color: var(--clr-accent);
 		}
+	}
+}
+
+@keyframes show {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
 	}
 }
