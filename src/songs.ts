@@ -1,7 +1,7 @@
 import havanaSong from './sounds/havana.mp3'
 import havanaImg from './images/havana.webp'
-import hrsSong from './sounds/hrs.mp3'
-import hrsImg from './images/hrs.webp'
+import stilldreSong from './sounds/stilldre.mp3'
+import stilldreImg from './images/stilldre.webp'
 import rapgodSong from './sounds/rapgod.mp3'
 import rapgodImg from './images/rapgod.webp'
 import allmineSong from './sounds/allmine.mp3'
@@ -17,7 +17,6 @@ export const SONGS = [
 		isFavourite: false,
 		length: '3.39',
 		source: havanaSong,
-		link: 'https://www.youtube.com/watch?v=HCjNJDNzw8Y',
 		img: havanaImg,
 		author: 'Camila Cabello',
 		title: 'Havana',
@@ -27,7 +26,6 @@ export const SONGS = [
 		isFavourite: false,
 		length: '2.28',
 		source: allmineSong,
-		link: 'https://www.youtube.com/watch?v=TrQ7w1bdNvY',
 		img: allmineImg,
 		author: 'Kanye West',
 		title: 'All Mine',
@@ -37,7 +35,6 @@ export const SONGS = [
 		isFavourite: false,
 		length: '2.19',
 		source: moodSong,
-		link: 'https://www.youtube.com/watch?v=GrAchTdepsU',
 		img: moodImg,
 		author: '24kGoldn',
 		title: 'Mood',
@@ -47,7 +44,6 @@ export const SONGS = [
 		isFavourite: false,
 		length: '6.13',
 		source: rapgodSong,
-		link: 'https://www.youtube.com/watch?v=XbGs_qK2PQA',
 		img: rapgodImg,
 		author: 'Eminem',
 		title: 'Rap God',
@@ -58,7 +54,6 @@ export const SONGS = [
 		isFavourite: false,
 		length: '4.31',
 		source: himandiSong,
-		link: 'https://www.youtube.com/watch?v=SA7AIQw-7Ms',
 		img: himandiImg,
 		author: 'G-Eazy & Halsey',
 		title: 'Him & I',
@@ -67,12 +62,11 @@ export const SONGS = [
 	{
 		id: 5,
 		isFavourite: false,
-		length: '3.58',
-		source: hrsSong,
-		link: 'https://www.youtube.com/watch?v=2up_Eq6r6Ko',
-		img: hrsImg,
-		author: 'Pitbull',
-		title: 'Hotel Room Service',
+		length: '4.31',
+		source: stilldreSong,
+		img: stilldreImg,
+		author: 'Dr. Dre',
+		title: 'Still D.R.E.',
 	},
 ]
 
@@ -81,7 +75,6 @@ export interface songInterface {
 	isFavourite: boolean
 	length: string
 	source: string
-	link: string
 	img: string
 	author: string
 	title: string

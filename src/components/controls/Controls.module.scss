@@ -2,6 +2,7 @@
 	display: flex;
 	justify-content: space-evenly;
 	transform: translateY(-2.5em);
+	position: relative;
 	.icon {
 		color: var(--clr-secondary);
 		display: inline-block;
@@ -48,6 +49,9 @@
 				transform: translate(-50%, -50%) scale(1.25);
 			}
 		}
+	}
+	.audio-container {
+		position: relative;
 	}
 }
 

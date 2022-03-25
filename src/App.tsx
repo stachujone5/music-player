@@ -2,9 +2,8 @@ import { Controls } from './components/controls/Controls'
 import { ImageContainer } from './components/image_container/ImageContainer'
 import { Info } from './components/info/Info'
 import { Progress } from './components/progress/Progress'
-import { SoundControl } from './components/sound_control/SoundControl'
 import { usePlayer } from './hooks/usePlayer'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import classes from './App.module.scss'
 import { ACTIONS } from './hooks/actions'
 
@@ -13,6 +12,12 @@ export const App = () => {
 
 	const audioRef = useRef<HTMLAudioElement>(null)
 
+	useEffect(() => {
+		if (!state.volumeTouched) {
+			audioRef.current!.volume = 0.25
+		}
+	}, [audioRef, state.volumeTouched])
+
 	const handleEnd = () => {
 		dispatch({ type: ACTIONS.NEXT_SONG })
 	}
@@ -20,7 +25,6 @@ export const App = () => {
 	return (
 		<div className={classes.container}>
 			<audio ref={audioRef} onEnded={handleEnd} src={state.currentSong.source}></audio>
-			<SoundControl audioRef={audioRef} />
 			<ImageContainer state={state} />
 			<Controls dispatch={dispatch} state={state} audioRef={audioRef} />
 			<Progress dispatch={dispatch} state={state} audioRef={audioRef} />

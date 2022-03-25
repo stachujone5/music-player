@@ -1,14 +1,17 @@
 .input-container {
 	position: absolute;
-	width: 100%;
-	margin: 0 auto;
-	top: -5em;
-	right: 0;
+	width: 6em;
+	top: -3em;
+	left: -1.5em;
+	transform: rotate(-90deg);
+	@media (min-width: 30rem) {
+		left: -1em;
+	}
 
 	.input-progress {
 		height: 6px;
 		background-color: var(--clr-accent);
-		width: 20;
+		width: 50%;
 		opacity: 0.7;
 		border-radius: var(--br);
 		pointer-events: none;
@@ -22,6 +25,7 @@
 		background-color: var(--clr-secondary);
 		cursor: pointer;
 		position: absolute;
+
 		&::-webkit-slider-thumb {
 			-webkit-appearance: none;
 			width: var(--spacer-2);

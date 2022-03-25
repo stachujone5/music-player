@@ -10,6 +10,9 @@ const initialState: playerState = {
 	songs: SONGS,
 	currentSong: SONGS[0],
 	goBack: true,
+	showVolume: false,
+	volumeTouched: false,
+	value: 25,
 }
 
 export interface playerState {
@@ -20,6 +23,9 @@ export interface playerState {
 	songs: songInterface[]
 	currentSong: songInterface
 	goBack: boolean
+	showVolume: boolean
+	volumeTouched: boolean
+	value: number
 }
 
 export interface playerAction {
@@ -33,11 +39,19 @@ const reducer = (state: playerState, action: playerAction) => {
 			return { ...state, isPlaying: !state.isPlaying }
 
 		case ACTIONS.PLAY:
-			return { ...state, isPlaying: true }
+			return { ...state, isPlaying: true, showVolume: false }
 
 		case ACTIONS.NEXT_SONG:
 			if (state.songIndex === SONGS.length - 1) {
-				return { ...state, songIndex: 0, time: 0, width: 0, currentSong: SONGS[0], goBack: true }
+				return {
+					...state,
+					songIndex: 0,
+					time: 0,
+					width: 0,
+					currentSong: SONGS[0],
+					goBack: true,
+					showVolume: false,
+				}
 			}
 			return {
 				...state,
@@ -46,6 +60,7 @@ const reducer = (state: playerState, action: playerAction) => {
 				width: 0,
 				currentSong: SONGS[state.songIndex + 1],
 				goBack: true,
+				showVolume: false,
 			}
 
 		case ACTIONS.PREV_SONG:
@@ -57,6 +72,7 @@ const reducer = (state: playerState, action: playerAction) => {
 					width: 0,
 					currentSong: SONGS[SONGS.length - 1],
 					goBack: true,
+					showVolume: false,
 				}
 			}
 			return {
@@ -66,6 +82,7 @@ const reducer = (state: playerState, action: playerAction) => {
 				width: 0,
 				currentSong: SONGS[state.songIndex - 1],
 				goBack: true,
+				showVolume: false,
 			}
 
 		case ACTIONS.SET_BAR:
@@ -79,6 +96,15 @@ const reducer = (state: playerState, action: playerAction) => {
 
 		case ACTIONS.GO_BACK:
 			return { ...state, goBack: false }
+
+		case ACTIONS.TOGGLE_SHOW_VOLUME:
+			return { ...state, showVolume: !state.showVolume }
+
+		case ACTIONS.SET_VOLUME_TOUCHED:
+			return { ...state, volumeTouched: true }
+
+		case ACTIONS.SET_VALUE:
+			return { ...state, value: action.payload }
 
 		default:
 			return state

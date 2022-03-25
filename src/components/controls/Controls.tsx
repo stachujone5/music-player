@@ -1,9 +1,11 @@
-import { FaArrowRight, FaArrowLeft, FaHeart, FaExternalLinkAlt, FaPlay, FaPause } from 'react-icons/fa'
+import { FaArrowRight, FaArrowLeft, FaHeart, FaPlay, FaPause } from 'react-icons/fa'
+import { HiVolumeUp } from 'react-icons/hi'
 import { IconContext } from 'react-icons'
 import { playerAction, playerState } from '../../hooks/usePlayer'
 import { ACTIONS } from '../../hooks/actions'
 import { RefObject } from 'react'
 import classes from './Controls.module.scss'
+import { SoundControl } from '../sound_control/SoundControl'
 
 interface ControlsProps {
 	dispatch: React.Dispatch<playerAction>
@@ -62,6 +64,10 @@ export const Controls = ({ dispatch, state, audioRef }: ControlsProps) => {
 		return newTime
 	}
 
+	const handleVolumeChange = () => {
+		dispatch({ type: ACTIONS.TOGGLE_SHOW_VOLUME })
+	}
+
 	return (
 		<IconContext.Provider value={{ className: classes.icon }}>
 			<p aria-labelledby="Song's full time" className={classes['full-time']}>
@@ -74,14 +80,6 @@ export const Controls = ({ dispatch, state, audioRef }: ControlsProps) => {
 					onClick={() => handleIsFavourite(state.songIndex)}>
 					<FaHeart />
 				</button>
-				<a
-					aria-label='Song link'
-					rel='noreferrer'
-					target='_blank'
-					className={classes.btn}
-					href={state.currentSong.link}>
-					<FaExternalLinkAlt />
-				</a>
 				<button aria-label='Previous song' className={classes.btn} onClick={handlePrevSong}>
 					<FaArrowLeft />
 				</button>
@@ -91,6 +89,12 @@ export const Controls = ({ dispatch, state, audioRef }: ControlsProps) => {
 				<button aria-label='Next song' className={classes.btn} onClick={handleNextSong}>
 					<FaArrowRight />
 				</button>
+				<div className={classes['audio-container']}>
+					<button aria-label='Volume' className={classes.btn} onClick={handleVolumeChange}>
+						<HiVolumeUp />
+					</button>
+					{state.showVolume && <SoundControl audioRef={audioRef} state={state} dispatch={dispatch} />}
+				</div>
 			</div>
 			<p aria-labelledby="Current song's time" className={classes['current-time']}>
 				{formatTime(state.time)}
