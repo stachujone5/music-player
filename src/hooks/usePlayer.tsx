@@ -9,6 +9,7 @@ const initialState: playerState = {
 	time: 0,
 	songs: SONGS,
 	currentSong: SONGS[0],
+	goBack: true,
 }
 
 export interface playerState {
@@ -18,6 +19,7 @@ export interface playerState {
 	time: number
 	songs: songInterface[]
 	currentSong: songInterface
+	goBack: boolean
 }
 
 export interface playerAction {
@@ -35,21 +37,46 @@ const reducer = (state: playerState, action: playerAction) => {
 
 		case ACTIONS.NEXT_SONG:
 			if (state.songIndex === SONGS.length - 1) {
-				return { ...state, songIndex: 0, time: 0, width: 0, currentSong: SONGS[0] }
+				return { ...state, songIndex: 0, time: 0, width: 0, currentSong: SONGS[0], goBack: true }
 			}
-			return { ...state, songIndex: state.songIndex + 1, time: 0, width: 0, currentSong: SONGS[state.songIndex + 1] }
+			return {
+				...state,
+				songIndex: state.songIndex + 1,
+				time: 0,
+				width: 0,
+				currentSong: SONGS[state.songIndex + 1],
+				goBack: true,
+			}
 
 		case ACTIONS.PREV_SONG:
 			if (state.songIndex === 0) {
-				return { ...state, songIndex: SONGS.length - 1, time: 0, width: 0, currentSong: SONGS[SONGS.length - 1] }
+				return {
+					...state,
+					songIndex: SONGS.length - 1,
+					time: 0,
+					width: 0,
+					currentSong: SONGS[SONGS.length - 1],
+					goBack: true,
+				}
 			}
-			return { ...state, songIndex: state.songIndex - 1, time: 0, width: 0, currentSong: SONGS[state.songIndex - 1] }
+			return {
+				...state,
+				songIndex: state.songIndex - 1,
+				time: 0,
+				width: 0,
+				currentSong: SONGS[state.songIndex - 1],
+				goBack: true,
+			}
 
 		case ACTIONS.SET_BAR:
 			return { ...state, width: action.payload.width, time: action.payload.time }
 
 		case ACTIONS.SET_SONGS:
 			return { ...state, songs: action.payload }
+		case ACTIONS.RESET:
+			return { ...state, goBack: true, time: 0, width: 0 }
+		case ACTIONS.GO_BACK:
+			return { ...state, goBack: false }
 		default:
 			return state
 	}

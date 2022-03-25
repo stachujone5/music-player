@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, forwardRef, RefObject } from 'react'
 import { playerAction, playerState } from '../../hooks/usePlayer'
 import { ACTIONS } from '../../hooks/actions'
 import classes from './Progress.module.scss'
@@ -6,10 +6,10 @@ import classes from './Progress.module.scss'
 interface ProgressProps {
 	dispatch: React.Dispatch<playerAction>
 	state: playerState
+	audioRef: RefObject<HTMLAudioElement>
 }
 
-export const Progress = ({ dispatch, state }: ProgressProps) => {
-	const audioRef = useRef<HTMLAudioElement>(null)
+export const Progress = ({ dispatch, state, audioRef }: ProgressProps) => {
 	const widthRef = useRef(0)
 
 	useEffect(() => {
@@ -24,11 +24,17 @@ export const Progress = ({ dispatch, state }: ProgressProps) => {
 		if (state.isPlaying) {
 			const progressInterval: NodeJS.Timer = setInterval(() => {
 				widthRef.current = (audioRef.current!.currentTime / audioRef.current!.duration) * 100
-				dispatch({ type: ACTIONS.SET_BAR, payload: { width: widthRef.current, time: audioRef.current!.currentTime } })
+				dispatch({
+					type: ACTIONS.SET_BAR,
+					payload: { width: widthRef.current, time: audioRef.current!.currentTime },
+				})
+				if (state.time > 2) {
+					dispatch({ type: ACTIONS.GO_BACK })
+				}
 			}, 100)
 			return () => clearInterval(progressInterval)
 		}
-	}, [state.isPlaying, dispatch])
+	}, [state.isPlaying, dispatch, audioRef, state.time])
 
 	useEffect(() => {
 		window.addEventListener('keydown', e => {
@@ -44,11 +50,7 @@ export const Progress = ({ dispatch, state }: ProgressProps) => {
 				audioRef.current!.currentTime = audioRef.current!.currentTime - 5
 			}
 		})
-	}, [dispatch])
-
-	const handleEnd = () => {
-		dispatch({ type: ACTIONS.NEXT_SONG })
-	}
+	}, [dispatch, audioRef])
 
 	const handleBar = (e: React.MouseEvent<HTMLDivElement>) => {
 		const targetWidth = e.currentTarget.clientWidth
@@ -62,7 +64,6 @@ export const Progress = ({ dispatch, state }: ProgressProps) => {
 
 	return (
 		<div className={classes.progress} onClick={handleBar} aria-label='Song progress bar'>
-			<audio ref={audioRef} src={state.currentSong.source} onEnded={handleEnd}></audio>
 			<div className={classes.inside} style={{ width: `${state.width}%` }}></div>
 		</div>
 	)

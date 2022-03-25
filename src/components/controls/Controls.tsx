@@ -3,19 +3,28 @@ import { IconContext } from 'react-icons'
 import classes from './Controls.module.scss'
 import { playerAction, playerState } from '../../hooks/usePlayer'
 import { ACTIONS } from '../../hooks/actions'
+import { RefObject } from 'react'
 
 interface ControlsProps {
 	dispatch: React.Dispatch<playerAction>
 	state: playerState
+	audioRef: RefObject<HTMLAudioElement>
 }
 
-export const Controls = ({ dispatch, state }: ControlsProps) => {
+export const Controls = ({ dispatch, state, audioRef }: ControlsProps) => {
 	const handleNextSong = () => {
 		dispatch({ type: ACTIONS.NEXT_SONG })
 	}
 
 	const handlePrevSong = () => {
-		dispatch({ type: ACTIONS.PREV_SONG })
+		if (state.goBack) {
+			dispatch({ type: ACTIONS.PREV_SONG })
+			return
+		}
+		if (audioRef.current) {
+			dispatch({ type: ACTIONS.RESET })
+			audioRef.current.currentTime = 0
+		}
 	}
 
 	const handlePlayToggle = () => {
