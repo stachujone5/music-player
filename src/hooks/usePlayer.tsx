@@ -73,10 +73,13 @@ const reducer = (state: playerState, action: playerAction) => {
 
 		case ACTIONS.SET_SONGS:
 			return { ...state, songs: action.payload }
+
 		case ACTIONS.RESET:
 			return { ...state, goBack: true, time: 0, width: 0 }
+
 		case ACTIONS.GO_BACK:
 			return { ...state, goBack: false }
+
 		default:
 			return state
 	}

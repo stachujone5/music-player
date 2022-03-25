@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, forwardRef, RefObject } from 'react'
+import React, { useRef, useEffect, RefObject } from 'react'
 import { playerAction, playerState } from '../../hooks/usePlayer'
 import { ACTIONS } from '../../hooks/actions'
 import classes from './Progress.module.scss'

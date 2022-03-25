@@ -1,5 +1,4 @@
-import { RefObject } from 'react'
-
+import { RefObject, useEffect, useRef, useState } from 'react'
 import classes from './SoundControl.module.scss'
 
 interface SoundControlProps {
@@ -7,13 +6,28 @@ interface SoundControlProps {
 }
 
 export const SoundControl = ({ audioRef }: SoundControlProps) => {
-	const handleSound = () => {
-		if (audioRef.current) audioRef.current.currentTime += 10
+	const inputRef = useRef<HTMLInputElement>(null)
+	const [value, setValue] = useState('50')
+
+	const handleSoundChange = () => {
+		if (audioRef.current && inputRef.current) {
+			audioRef.current.volume = parseFloat(inputRef.current.value) / 100
+			setValue(inputRef.current.value)
+		}
 	}
 
+	useEffect(() => {
+		if (audioRef.current) {
+			audioRef.current.volume = 0.5
+		}
+	}, [audioRef])
+
+	console.log(audioRef.current?.volume)
+
 	return (
-		<div onClick={handleSound} className={classes.soundControl}>
-			a
+		<div className={classes['input-container']}>
+			<input type='range' className={classes.input} onChange={handleSoundChange} ref={inputRef} />
+			<div className={classes['input-progress']} style={{ width: `${value}%` }}></div>
 		</div>
 	)
 }

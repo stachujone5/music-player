@@ -1,9 +1,9 @@
 import { FaArrowRight, FaArrowLeft, FaHeart, FaExternalLinkAlt, FaPlay, FaPause } from 'react-icons/fa'
 import { IconContext } from 'react-icons'
-import classes from './Controls.module.scss'
 import { playerAction, playerState } from '../../hooks/usePlayer'
 import { ACTIONS } from '../../hooks/actions'
 import { RefObject } from 'react'
+import classes from './Controls.module.scss'
 
 interface ControlsProps {
 	dispatch: React.Dispatch<playerAction>
