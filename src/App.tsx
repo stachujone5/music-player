@@ -23,12 +23,12 @@ export const App = () => {
 	}
 
 	return (
-		<div className={classes.container}>
+		<main className={classes.container}>
 			<audio ref={audioRef} onEnded={handleEnd} src={state.currentSong.source}></audio>
 			<ImageContainer state={state} />
 			<Controls dispatch={dispatch} state={state} audioRef={audioRef} />
 			<Progress dispatch={dispatch} state={state} audioRef={audioRef} />
 			<Info state={state} />
-		</div>
+		</main>
 	)
 }
