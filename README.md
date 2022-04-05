@@ -1,4 +1,4 @@
-# Music player build in react
+# Music player built in react
 
 My second project that was build mainly to practice typescript as I've never used it before. In the app I am also using custom hooks and useReducer.
 
